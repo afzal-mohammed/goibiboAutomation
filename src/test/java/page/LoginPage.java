@@ -5,6 +5,10 @@ import org.openqa.selenium.WebElement;
 
 public class LoginPage extends CommonPage {
 
+	public LoginPage(){
+		super(true);
+	}
+	
 	public void launchBrowser() {
 
 		driver.get("https://www.goibibo.com/flights/");
