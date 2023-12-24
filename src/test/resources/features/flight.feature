@@ -64,19 +64,19 @@ Feature: validating flight search feature
 #And selects same departure and return date
 #Then flights results should be displayed
 
-#Scenario: Verify that user should not be able to select back dated booking date
-#Given user launches goibibo website
-#When user enters different location in from and to fields for back dated
-#Then user should not able to select back dated dates
-
-#Scenario: Verify that user should able to swap from and to fields
-#Given user launches goibibo website
-#When user enters different location in from and to fields for swap
-#And click swap button
-#Then from and to location should be swapped
-
-Scenario: Verify that user should not able  to search flight for children and infants without pre selected adult
-Given user launches goibibo website
-When user enters different location in from and to fields for children
-And selects children and infant as travellers 
-Then adult deselect button should be disabled
+Scenario: Verify that user should not be able to select back dated booking date 
+	Given user launches goibibo website 
+	When user enters different location in from and to fields for back dated 
+	Then user should not able to select back dated dates 
+	
+	#Scenario: Verify that user should able to swap from and to fields
+	#Given user launches goibibo website
+	#When user enters different location in from and to fields for swap
+	#And click swap button
+	#Then from and to location should be swapped
+	
+	#Scenario: Verify that user should not able  to search flight for children and infants without pre selected adult
+	#Given user launches goibibo website
+	#When user enters different location in from and to fields for children
+	#And selects children and infant as travellers 
+	#Then adult deselect button should be disabled

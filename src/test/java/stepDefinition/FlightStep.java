@@ -3,7 +3,6 @@ package stepDefinition;
 import static org.junit.Assert.assertTrue;
 
 import java.sql.Driver;
-
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
@@ -207,8 +206,7 @@ public class FlightStep {
 
 	@Then("user should not able to select back dated dates")
 	public void user_should_not_able_to_select_back_dated_dates() throws InterruptedException {
-
-		flightPage.verifyBackDatedDateIsDisable();
+		Assert.assertTrue(flightPage.verifyBackDatedDateIsDisable());
 		flightPage.closeBrowser();
 	}
 

@@ -5,16 +5,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class CommonPage {
 
-	 static WebDriver driver;
+	static WebDriver driver;
 
 	CommonPage() {
 		this(false);
 	}
 
-	CommonPage(boolean launch) {
+	CommonPage(boolean launch) { // Escape Sequence
 		if (launch) {
-			System.setProperty("webdriver.chrome.driver",
-					"D:\\Automation Project\\Goibibo Automation\\goibiboAutomation\\src\\test\\resources\\driver\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "./src/test/resources/driver/chromedriver.exe");
 			System.setProperty("webdriver.http.factory", "jdk-http-client");
 			driver = new ChromeDriver();
 			driver.manage().window().maximize();

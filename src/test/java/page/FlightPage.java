@@ -4,6 +4,8 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
 
+import java.util.List;
+
 import javax.accessibility.AccessibleStateSet;
 
 import org.checkerframework.framework.qual.FromByteCode;
@@ -549,13 +551,20 @@ public class FlightPage extends CommonPage {
 
 	}
 
-	public void verifyBackDatedDateIsDisable() throws InterruptedException {
+	public boolean verifyBackDatedDateIsDisable() throws InterruptedException {
 
 		Thread.sleep(3000);
 
-		WebElement backDatedDate = driver.findElement(By.xpath("//p[@class=\"fsw__date\"][contains(text(), '19')]"));
-
-		System.out.println("Is element enabled? " + backDatedDate.isEnabled()); // doubt is disabled, still showing true
+		WebElement backDatedDate = driver.findElement(By.xpath("//div[contains(@aria-label,'Dec 19')]"));
+		boolean res;
+		if(backDatedDate.getAttribute("aria-disabled").equals("true")) {
+			res=true;
+			System.out.println("Element is Disabled");
+		}else {
+			res = false;
+			System.out.println("Element is Enabled");
+		}
+		return res;
 	}
 
 	public void enterDifferentLocationForSwap() throws InterruptedException {
@@ -600,6 +609,7 @@ public class FlightPage extends CommonPage {
 	public void verifyFieldsAreSwapped() {
 
 		WebElement swapButton = driver.findElement(By.xpath("//span[@class='sc-12foipm-51 foqjOL']"));
+		List<WebElement> buttons = driver.findElements(By.xpath("//div//input"));
 		swapButton.click();
 		String fromFieldText = driver.findElement(By.xpath("//span[contains(text(),'From')]/..")).getText();
 		String toFieldText = driver.findElement(By.xpath("//span[contains(text(),'To')]/..")).getText();
