@@ -646,7 +646,7 @@ public class FlightPage extends CommonPage {
 		// WebElement addInfant = driver.findElement(
 		// By.xpath("//*[@id=\"root\"]/div[3]/div/div/div[1]/div[5]/div[2]/div[2]/div/div[1]/div[3]/div/span[3]"));
 
-		addChild.click();
+		addChild.click(); 
 		// addInfant.click();
 
 	}
