@@ -11,9 +11,14 @@ import javax.accessibility.AccessibleStateSet;
 import org.checkerframework.framework.qual.FromByteCode;
 import org.junit.validator.PublicClassValidator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Sleeper;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import io.cucumber.core.internal.com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
 import io.cucumber.java.be.I.Is;
 import io.cucumber.java.en.Then;
 import junit.framework.Assert;
@@ -557,10 +562,10 @@ public class FlightPage extends CommonPage {
 
 		WebElement backDatedDate = driver.findElement(By.xpath("//div[contains(@aria-label,'Dec 19')]"));
 		boolean res;
-		if(backDatedDate.getAttribute("aria-disabled").equals("true")) {
-			res=true;
+		if (backDatedDate.getAttribute("aria-disabled").equals("true")) {
+			res = true;
 			System.out.println("Element is Disabled");
-		}else {
+		} else {
 			res = false;
 			System.out.println("Element is Enabled");
 		}
@@ -651,14 +656,124 @@ public class FlightPage extends CommonPage {
 
 		Thread.sleep(3000);
 
-		WebElement addChild = driver.findElement(
-				By.xpath("//*[@id=\"root\"]/div[3]/div/div/div[1]/div[5]/div[2]/div[2]/div/div[1]/div[2]/div/span[3]"));
-		// WebElement addInfant = driver.findElement(
-		// By.xpath("//*[@id=\"root\"]/div[3]/div/div/div[1]/div[5]/div[2]/div[2]/div/div[1]/div[3]/div/span[3]"));
+		WebElement addChild = driver.findElements(By.xpath("//span[@class='sc-12foipm-64 dGRyPm']")).get(3);
+		WebElement addInfant = driver.findElements(By.xpath("//span[@class='sc-12foipm-64 dGRyPm']")).get(5);
 
-		addChild.click(); 
-		// addInfant.click();
+		addChild.click();
+		addInfant.click();
 
 	}
 
+	public void verifyAdultsButtonIsDisabled() {
+
+		WebElement adultTravellerMinusButton = driver.findElements(By.xpath("//span[@class='sc-12foipm-64 dGRyPm']"))
+				.get(0);
+
+		if (adultTravellerMinusButton.isEnabled()) {
+			System.out.println("Element is present");
+		} else {
+			System.out.println("Element is not present"); // doubt unable to verify
+		}
+
+	}
+
+	public void verifyAdultTravellerIsSelectedAsDefault() {
+
+		WebElement travellersAndClassButton = driver
+				.findElement(By.xpath("//div[@class='sc-12foipm-16 wRKJm fswFld ']//p[contains(text(), 'Adult')]"));
+		travellersAndClassButton.click();
+		String verifyOneAdultIsSelected = driver
+				.findElement(By.xpath("//span[@class='sc-12foipm-65 dqoXYl'][contains(text(), '1')]")).getText();
+
+		if (verifyOneAdultIsSelected.contains("1")) {
+			System.out.println("One Adult Passenger is selected as default passenger ");
+		} else {
+			System.out.println("No passenger is selected as default");
+		}
+	}
+
+	public void selectReturnDate() {
+
+		WebElement returnButton = driver.findElement(By.xpath("//span[contains(text(), 'Return')]"));
+		returnButton.click();
+
+		WebElement returnDoneButton = driver
+				.findElement(By.xpath("//span[@role= 'presentation'][contains(text(), 'Done')]"));
+		returnDoneButton.click();
+		WebElement travellersDoneButton = driver.findElement(By.xpath("//a[contains(text(), 'Done')]"));
+		travellersDoneButton.click();
+
+	}
+
+	public void verifyRoundTripIsAutoSelected() throws InterruptedException {
+
+		boolean roundTripButton = driver.findElement(By.xpath("//p[contains(text(),'Round-trip')]")).isSelected();
+		boolean oneWayButton = driver.findElement(By.xpath("//p[contains(text(),'One-way')]")).isSelected();
+
+		System.out.println("One way button is selected " + oneWayButton);
+		System.out.println("Round trip button is selected " + roundTripButton);
+
+		// Unable to verify element is selected
+
+	}
+
+	public void selectReturnButton() {
+
+		WebElement clickReturn = driver.findElement(By.xpath("//p[contains(text(), 'return flight')]"));
+		clickReturn.click();
+	}
+
+	public void verifyReturnDateIsDisplayed() {
+
+		boolean clickReturn = driver.findElement(By.xpath("//div[@class='DayPicker Range']")).isDisplayed();
+		System.out.println("Return date is displayed " + clickReturn);
+
+	}
+
+	public void enterLocationToVerifyAutoSwitch() throws InterruptedException {
+
+		driver.findElement(fromField).click();
+		WebElement fromInput = driver.findElement(By.xpath("//span[contains(text(),'From')]/..//input"));
+		fromInput.sendKeys("Pune");
+		Thread.sleep(1000);
+		WebElement autoSuggestList = driver
+				.findElement(By.xpath("//ul[@id='autoSuggest-list']//li//p[contains(text(),'Pune')]"));
+		autoSuggestList.click();
+
+		try {
+			Thread.sleep(3000);
+			driver.findElement(toField).click();
+		}
+
+		catch (Exception e) {
+
+		}
+		WebElement toInput = driver.findElement(By.xpath("//span[contains(text(),'To')]/..//input"));
+		toInput.sendKeys("Mumbai");
+		Thread.sleep(1000);
+		WebElement autoSuggestListInput = driver
+				.findElement(By.xpath("//span[@class='autoCompleteTitle '][contains(text(), Mumbai)]"));
+		autoSuggestListInput.click();
+
+	}
+
+	public void verifyDepartureIsAutoSelected() {
+
+		boolean verifyAutoSwitchDeparture = driver.findElement(By.xpath("//div[@class='DayPicker']")).isDisplayed();
+		System.out.println("Auto switch to departure is " + verifyAutoSwitchDeparture);
+
+		WebElement departureDoneButton = driver.findElement(By.className("fswTrvl__done"));
+		departureDoneButton.click();
+
+	}
+
+	public void verifyAutoSwitchToTravellerAndClass() {
+
+		boolean verifyAutoSwitchTravellerButton = driver.findElement(By.xpath("//div[@class='sc-12foipm-74 bGJMhT']"))
+				.isDisplayed();
+		System.out.println("Auto switch to traveller and class is " + verifyAutoSwitchTravellerButton);
+		WebElement travellersDoneButton = driver.findElement(By.xpath("//a[contains(text(), 'Done')]"));
+		travellersDoneButton.click();
+
+	}
 }

@@ -243,8 +243,70 @@ public class FlightStep {
 	}
 
 	@Then("adult deselect button should be disabled")
-	public void adult_deselect_button_should_be_disabled() {
+	public void adult_deselect_button_should_be_disabled() throws InterruptedException {
 
+		flightPage.verifyAdultsButtonIsDisabled();
+		flightPage.closeBrowser();
+	}
+
+	@Then("one adult should be selected by default for traveller") // TC 15
+	public void one_adult_should_be_selected_by_default_for_traveller() throws InterruptedException {
+
+		flightPage.verifyAdultTravellerIsSelectedAsDefault();
+		flightPage.closeBrowser();
+
+	}
+
+	@When("user clicks return date") // TC 16
+	public void user_clicks_return_date() {
+
+		flightPage.selectReturnDate();
+
+	}
+
+	@Then("one way trip should auto switch to round trip")
+	public void one_way_trip_should_auto_switch_to_round_trip() throws InterruptedException {
+
+		flightPage.verifyRoundTripIsAutoSelected();
+		flightPage.closeBrowser();
+
+	}
+
+	@When("user selects from and to location") // TC 17
+	public void user_selects_from_and_to_location() throws InterruptedException {
+		flightPage.enterDifferentLocationForSwap();
+
+	}
+
+	@When("clicks on return option")
+	public void clicks_on_return_option() {
+		flightPage.selectReturnButton();
+
+	}
+
+	@Then("dates should be displayed")
+	public void dates_should_be_displayed() {
+
+		flightPage.verifyReturnDateIsDisplayed();
+		flightPage.closeBrowser();
+
+	}
+
+	@When("enters from and to location to verify auto switch option") // TC 18
+	public void enters_from_and_to_location_to_verify_auto_switch_option() throws InterruptedException {
+		flightPage.enterLocationToVerifyAutoSwitch();
+	}
+
+	@Then("departure option should auto switch and click done")
+	public void departure_option_should_auto_switch_and_click_done() throws InterruptedException {
+		flightPage.verifyDepartureIsAutoSelected();
+
+	}
+
+	@Then("traveller and class options should auto switch")
+	public void traveller_and_class_options_should_auto_switch() {
+		flightPage.verifyAutoSwitchToTravellerAndClass();
+		flightPage.closeBrowser();
 	}
 
 }
