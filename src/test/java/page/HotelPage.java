@@ -42,13 +42,12 @@ public class HotelPage extends CommonPage {
 
 	}
 
-	public boolean verifyHotelSearch() {
+	public void verifyHotelSearch() {
 
 		String actualUrl = driver.getCurrentUrl();
 		String expectedUrl = "https://www.goibibo.com/hotels/find-hotels-in-Goa,%20India/8717279093827200968/8717279093827200968/%7B%22ci%22:%2220240111%22,%22co%22:%2220240112%22,%22r%22:%221-2-0%22%7D/?{%22filter%22:{}}&sec=dom&cc=IN&locusId=CTGOI&locusType=city&cityCode=CTGOI";
 
 		assertEquals(expectedUrl, actualUrl);
-		return false;
 
 	}
 }
