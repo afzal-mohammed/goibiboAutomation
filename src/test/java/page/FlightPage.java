@@ -7,6 +7,7 @@ import static org.junit.Assert.assertNotSame;
 import java.util.List;
 
 import javax.accessibility.AccessibleStateSet;
+import javax.security.auth.x500.X500Principal;
 
 import org.checkerframework.framework.qual.FromByteCode;
 import org.junit.validator.PublicClassValidator;
@@ -776,4 +777,122 @@ public class FlightPage extends CommonPage {
 		travellersDoneButton.click();
 
 	}
+
+	public void selectRoundTrip() {
+
+		WebElement clickRoundTrip = driver.findElement(By.xpath("//p[contains(text(),'Round-trip')]"));
+		clickRoundTrip.click();
+	}
+
+	public void verifyReturnDateIsSelectedByDefault() {
+
+		boolean verifyReturnDate = driver
+				.findElement(By.xpath("//p[@class='sc-12foipm-18 cTPYom fswWidgetTitle'][contains(text(), '4 Jan')]"))
+				.isEnabled();
+
+		System.out.println("Return date is selected by default : " + verifyReturnDate);
+	}
+
+	public void clickTravellerandClass() {
+
+		WebElement travellersAndClassButton = driver
+				.findElement(By.xpath("//div[@class='sc-12foipm-16 wRKJm fswFld ']//p[contains(text(), 'Adult')]"));
+		travellersAndClassButton.click();
+	}
+
+	public void selectThreeAdultPassengers() {
+
+		WebElement adultSelectButton = driver.findElements(By.xpath("//span[@class='sc-12foipm-64 dGRyPm']")).get(1);
+		for (int i = 1; i <= 2; i++) {
+			adultSelectButton.click();
+		}
+
+	}
+
+	public void verifyThreeAdultPassengerIsSelected() {
+
+		boolean verifyThreeAdultSelected = driver.findElement(By.xpath("//span[contains(text(), '3')]")).isDisplayed();
+		System.out.println("Is three adult passenger is selected : " + verifyThreeAdultSelected);
+
+	}
+
+	public void verifyThreeAdultChildrenInfantIsSelected() {
+
+		WebElement adultSelectButton = driver.findElements(By.xpath("//span[@class='sc-12foipm-64 dGRyPm']")).get(1);
+		for (int i = 1; i <= 2; i++) {
+			adultSelectButton.click();
+
+		}
+		boolean verifyThreeAdultSelected = driver.findElements(By.xpath("//span[contains(text(), '3')]")).get(0)
+				.isDisplayed();
+		System.out.println("Three adult is selected :" + verifyThreeAdultSelected);
+
+		WebElement addChild = driver.findElements(By.xpath("//span[@class='sc-12foipm-64 dGRyPm']")).get(3);
+		for (int a = 1; a <= 3; a++) {
+			addChild.click();
+
+		}
+		boolean verifyThreeChildSelected = driver.findElements(By.xpath("//span[contains(text(), '3')]")).get(1)
+				.isDisplayed();
+		System.out.println("Three child is selected :" + verifyThreeChildSelected);
+		WebElement addInfant = driver.findElements(By.xpath("//span[@class='sc-12foipm-64 dGRyPm']")).get(5);
+		for (int b = 1; b <= 3; b++) {
+			addInfant.click();
+
+		}
+		boolean verifyThreeInfantSelected = driver.findElements(By.xpath("//span[contains(text(), '3')]")).get(2)
+				.isDisplayed();
+		System.out.println("Three child is selected :" + verifyThreeInfantSelected);
+
+	}
+
+	public void selectPremiumEconomy() {
+		WebElement clickPremumEco = driver.findElement(By.xpath("//li[contains(text(), 'pre')]"));
+		clickPremumEco.click();
+	}
+
+	public void verifyThreeAdultSelectedForPreEco() {
+
+		WebElement adultSelectButton = driver.findElements(By.xpath("//span[@class='sc-12foipm-64 dGRyPm']")).get(1);
+		for (int i = 1; i <= 2; i++) {
+			adultSelectButton.click();
+
+		}
+		boolean verifyThreeAdultSelected = driver.findElements(By.xpath("//span[contains(text(), '3')]")).get(0)
+				.isDisplayed();
+		System.out.println("Three adult is selected :" + verifyThreeAdultSelected);
+
+	}
+
+	public void selectTenAdultAndNineChildrenAndNineInfant() throws InterruptedException {
+
+		WebElement adultSelectButton = driver.findElements(By.xpath("//span[@class='sc-12foipm-64 dGRyPm']")).get(1);
+		for (int i = 1; i <= 9; i++) {
+			adultSelectButton.click();
+
+		}
+		boolean verifyTenAdultSelected = driver.findElements(By.xpath("//span[contains(text(), '10')]")).get(0)
+				.isDisplayed();
+		System.out.println("Ten adult is selected :" + verifyTenAdultSelected);
+
+		WebElement addChild = driver.findElements(By.xpath("//span[@class='sc-12foipm-64 dGRyPm']")).get(3);
+		for (int a = 1; a <= 9; a++) {
+			addChild.click();
+
+		}
+		boolean verifyNineChildSelected = driver.findElements(By.xpath("//span[contains(text(), '9')]")).get(0)
+				.isDisplayed();
+		System.out.println("Nine child is selected :" + verifyNineChildSelected);
+
+		WebElement addInfant = driver.findElements(By.xpath("//span[@class='sc-12foipm-64 dGRyPm']")).get(5);
+		for (int b = 1; b <= 9; b++) {
+			addInfant.click();
+
+		}
+		boolean verifyNineInfanttSelected = driver.findElements(By.xpath("//span[contains(text(), '9')]")).get(1)
+				.isDisplayed();
+		System.out.println("Nine child is selected :" + verifyNineInfanttSelected);
+
+	}
+
 }

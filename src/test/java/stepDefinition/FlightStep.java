@@ -292,7 +292,7 @@ public class FlightStep {
 
 	}
 
-	@When("enters from and to location to verify auto switch option") // TC 18
+	@When("entes from and to location to verify auto switch option") // TC 18
 	public void enters_from_and_to_location_to_verify_auto_switch_option() throws InterruptedException {
 		flightPage.enterLocationToVerifyAutoSwitch();
 	}
@@ -307,6 +307,74 @@ public class FlightStep {
 	public void traveller_and_class_options_should_auto_switch() {
 		flightPage.verifyAutoSwitchToTravellerAndClass();
 		flightPage.closeBrowser();
+	}
+
+	@When("user selects round trip") // TC 19
+	public void user_selects_round_trip() {
+
+		flightPage.selectRoundTrip();
+
+	}
+
+	@Then("return dates are selected by default")
+	public void return_dates_are_selected_by_default() {
+
+		flightPage.verifyReturnDateIsSelectedByDefault();
+		flightPage.closeBrowser();
+
+	}
+
+	@When("selects travellers & class") // TC 26
+	public void selects_travellers_class() {
+
+		flightPage.clickTravellerandClass();
+
+	}
+
+	@When("selects {int} adults passenger")
+	public void selects_adults_passenger(Integer int1) {
+
+		flightPage.selectThreeAdultPassengers();
+	}
+
+	@Then("three adult passenger should be selected")
+	public void three_adult_passenger_should_be_selected() {
+
+		flightPage.verifyThreeAdultPassengerIsSelected();
+		flightPage.closeBrowser();
+
+	}
+
+	@Then("should able to select Three adult, three children & three infants") // TC 28
+	public void should_able_to_select_three_adult_three_children_three_infants() {
+		flightPage.verifyThreeAdultChildrenInfantIsSelected();
+		flightPage.closeBrowser();
+	}
+
+	@When("selects premium economy") // TC 29
+	public void selects_premium_economy() {
+		flightPage.selectPremiumEconomy();
+
+	}
+
+	@Then("should able to select three adult passenger")
+	public void should_able_to_select_three_adult_passenger() {
+
+		flightPage.verifyThreeAdultSelectedForPreEco();
+		flightPage.closeBrowser();
+
+	}
+
+	@When("selects ten adults nine children and nine infants") // TC 30
+	public void selects_ten_adults_nine_children_and_nine_infants() throws InterruptedException {
+
+		flightPage.selectTenAdultAndNineChildrenAndNineInfant();
+
+	}
+
+	@Then("user should able to select maximum number of travellers")
+	public void user_should_able_to_select_maximum_number_of_travellers() {
+
 	}
 
 }
